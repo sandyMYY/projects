@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>快速设置分发规则</title>
+    <script type="text/javascript" src="templates/layuimini/lib/jquery-3.4.1/jquery-3.4.1.min.js"></script>
+    <script src="templates/layuimini/lib/layui-v2.5.5/layui.js" charset="utf-8"></script>
+    <link href="templates/layuimini/lib/layui-v2.5.5/css/layui.css" rel="stylesheet">
+</head>
+
+<body class="layui-layout-body">
+<div class="layui-form" lay-filter="ruleSelect">
+    <div class="layui-form-item">
+        <label class="layui-form-label">选择用户</label>
+        <div class="layui-input-inline" id="qyjl">
+            <select id="qyjlId" name="qyjlId" lay-filter="qyjlSelect" lay-verify="required">
+                <option value="">选择区域经理</option>
+            </select>
+        </div>
+        <div class="layui-input-inline" id="tdz">
+            <select id="tdzId" name="tdzId" lay-filter="tdzSelect">
+                <option value=""></option>
+            </select>
+        </div>
+        <div class="layui-input-inline" id="zx">
+            <select id="zxId" name="tdzId" lay-filter="zxSelect">
+                <option value=""></option>
+            </select>
+        </div>
+    </div>
+    <div class="layui-form-item">
+        <div class="layui-fluid">
+            <div class="layui-form layui-col-md12">
+                <div class="layui-form-item">
+                    <div class="layui-col-md4" lay-filter="select_nametype">
+                        <label class="layui-form-label">名单分类</label>
+                        <div class="layui-input-block">
+                            <select class="layui-select" lay-verify="required" name="select_nametype" id="select_nametype" xm-select="select_nametype" xm-select-type="1">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div class="layui-form-item">
+                    <div class="layui-col-md4">
+                        <label class="layui-form-label">业务来源</label>
+                        <div class="layui-input-block">
+                            <select name="select_campaign" id="select_campaign" lay-verify="required" lay-filter="select_campaign" xm-select="select_campaign" xm-select-type="1">
+                            </select>
+                        </div>
+                    </div>
+                </div>
+                <div style="display: inline-block; width: auto; height: 200px; padding: 10px; border: 1px solid #ddd; overflow: auto;" >
+                    <label id="layui-label">选择投保地区</label>
+                    <ul id="demo1">
+                        <div id="insureplace_tree" class="demo-tree-more"></div>
+                    </ul>
+                </div>
+
+
+                <div class="layui-row ">
+                    <div class="test-table-reload-btn" style="margin-bottom: 10px;">
+                        <button type="button" class="layui-btn" lay-submit lay-filter="btn_submit" id="btn_submit"><i class="layui-icon">&#xe609</i>获取</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
+</body>
+
+<script src="config.js" charset="utf-8"></script>
+<script src="getNameType.js" charset="utf-8"></script>
+<script src="getCampaign.js" charset="utf-8"></script>
+<script src="getInsurePlaceTree.js" charset="utf-8"></script>
+<script src="getUserSet.js" charset="utf-8"></script>
+<script type="text/javascript">
+    layui.use(['form', 'layer', 'jquery', 'table', 'laydate', 'element', 'upload', 'flow'], function () {
+        var $$ = layui.jquery;
+        var form = layui.form,
+            layer = parent.layer == undefined ? layui.layer : parent.layer,
+            //layer = layui.layer,
+            table = layui.table,
+            laydate = layui.laydate,
+            element = layui.element,
+            upload = layui.upload,
+            flow = layui.flow;
+        getUserSet();
+        getNameType();
+        getCampaign();
+        getInsurePlaceTree();
+        form.render();
+
+        form.on('submit(btn_submit)', function (obj) {
+            layer.confirm('确认录入无误吗？', {
+                btn: ['确认', '再看看']
+            }, function () {
+                var getName = JSON.stringify(layui.formSelects.value('select_base_cityname', 'name'));//取值name数组
+                layer.msg("你选择的值为：" + getName, { offset: '150px', icon: 1, time: 5000 }, function () {
+                });
+            });
+        });
+    });
+
+</script>
+</html>
