@@ -2,16 +2,19 @@ package com.za.baowatools.controller;
 
 import com.github.restdriver.serverdriver.http.response.Response;
 import com.za.baowatools.pojo.RuleInfo;
+import com.za.baowatools.pojo.UserSet;
 import com.za.baowatools.service.OtherRuleInfo;
 import com.za.baowatools.service.UserCookiesHandle;
 import com.za.baowatools.service.UserTreeHandle;
 import net.sf.json.JSONArray;
 import net.sf.json.JSONObject;
+import net.sf.json.JsonConfig;
 import org.apache.http.client.HttpClient;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RestController
@@ -81,13 +84,24 @@ public class SetRuleController {
     @RequestMapping("/setRuleFast")
     @ResponseBody
     public static void setRuleFast(@RequestBody JSONObject jsonParam){
-        JSONArray campaign = jsonParam.getJSONArray("campaignList");
-        JSONArray secondRule = jsonParam.getJSONArray("secondRules");
-        JSONArray insurePlaceCodeList = jsonParam.getJSONArray("insurePlaceCodeList");
-        String userId = jsonParam.getString("userId");
+        JSONObject campaign = jsonParam.getJSONObject("campaignList");
+        JSONObject secondRule = jsonParam.getJSONObject("secondRules");
+        JSONObject insurePlaceCodeList = jsonParam.getJSONObject("insurePlaceCodeList");
         String id = jsonParam.getString("id");
 
+        JSONObject userIds = jsonParam.getJSONObject("userIds");
+        String qyjlId = userIds.getString("qyjlId");
+        String tdzId = userIds.getString("tdzId");
+        //List<String> zxIds = userIds.getJSONObject("zxIds");
+
+        //设置RuleInfo内容
         RuleInfo ruleInfo = new RuleInfo();
+        ruleInfo.setId(id);
+        ruleInfo.setUserId(qyjlId);
+        ruleInfo.setSecondRules(campaign);
+        ruleInfo.setCampaignIdList(secondRule);
+        ruleInfo.setInsurePlaceCodeList(insurePlaceCodeList);
+
 
         //System.out.print("jsonArray = " + jsonArray.toString());
         //return jsonArray;

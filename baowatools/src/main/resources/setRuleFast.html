@@ -74,8 +74,9 @@
 <script src="getCampaign.js" charset="utf-8"></script>
 <script src="getInsurePlaceTree.js" charset="utf-8"></script>
 <script src="getUserSet.js" charset="utf-8"></script>
+<script src="addRule.js" charset="utf-8"></script>
 <script type="text/javascript">
-    layui.use(['form', 'layer', 'jquery', 'table', 'laydate', 'element', 'upload', 'flow'], function () {
+    layui.use(['form', 'layer', 'jquery', 'table', 'laydate', 'element', 'upload', 'flow', 'tree', 'util'], function () {
         var $$ = layui.jquery;
         var form = layui.form,
             layer = parent.layer == undefined ? layui.layer : parent.layer,
@@ -84,22 +85,44 @@
             laydate = layui.laydate,
             element = layui.element,
             upload = layui.upload,
-            flow = layui.flow;
+            flow = layui.flow,
+            util = layui.util,
+            tree = layui.tree;
+
         getUserSet();
         getNameType();
         getCampaign();
         getInsurePlaceTree();
         form.render();
 
-        form.on('submit(btn_submit)', function (obj) {
-            layer.confirm('确认录入无误吗？', {
-                btn: ['确认', '再看看']
+        form.on('submit(btn_submit)', function (data) {
+            //监听提交
+            //     //获得选中的节点
+            //
+            //     var checkData = tree.getChecked('value');
+            //
+            //     var list = new Array();
+            //
+            //     list = getChecked_list(checkData);
+            //
+            //     console.log(checkData);
+            //
+            //     console.log(list);
+
+            console.log("data.field = " + JSON.stringify(data.field));
+            layer.confirm('确认提交设置信息？', {
+                btn: ['确认', '取消']
             }, function () {
-                var getName = JSON.stringify(layui.formSelects.value('select_base_cityname', 'name'));//取值name数组
+
+                addRule();
+
+                var getName = JSON.stringify(layui.formSelects.value('ruleSelect', 'label'));//取值name数组
                 layer.msg("你选择的值为：" + getName, { offset: '150px', icon: 1, time: 5000 }, function () {
                 });
             });
         });
+
+
     });
 
 </script>

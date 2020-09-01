@@ -1,35 +1,37 @@
 package com.za.baowatools.pojo;
 
+import net.sf.json.JSONObject;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 
 //设置规则内容，最终转换为json形式传给保哇接口
 public class RuleInfo {
-    long id;
-    long userId;
+    String id;
+    String userId;
     //账号信息
     UserSet userSet;
     //业务来源
-    String[] campaignIdList;
+    JSONObject campaignIdList;
     //名单分类
-    List<SecondRules> secondRules;
+    JSONObject secondRules;
     //投保地列表
-    String[] insurePlaceCodeList;
+    JSONObject insurePlaceCodeList;
 
-    public long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    public long getUserId() {
+    public String getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(String userId) {
         this.userId = userId;
     }
 
@@ -41,39 +43,39 @@ public class RuleInfo {
         this.userSet = userSet;
     }
 
-    public String[] getCampaignIdList() {
+    public JSONObject getCampaignIdList() {
         return campaignIdList;
     }
 
-    public void setCampaignIdList(String[] campaignIdList) {
+    public void setCampaignIdList(JSONObject campaignIdList) {
         this.campaignIdList = campaignIdList;
     }
 
-    public List<SecondRules> getSecondRules() {
+    public JSONObject getSecondRules() {
         return secondRules;
     }
 
-    public void setSecondRules(List<SecondRules> secondRules) {
+    public void setSecondRules(JSONObject secondRules) {
         this.secondRules = secondRules;
     }
 
-    public String[] getInsurePlaceCodeList() {
+    public JSONObject getInsurePlaceCodeList() {
         return insurePlaceCodeList;
     }
 
-    public void setInsurePlaceCodeList(String[] insurePlaceCodeList) {
+    public void setInsurePlaceCodeList(JSONObject insurePlaceCodeList) {
         this.insurePlaceCodeList = insurePlaceCodeList;
     }
 
     @Override
     public String toString() {
         return "RuleInfo{" +
-                "id=" + id +
-                ", userId=" + userId +
+                "id='" + id + '\'' +
+                ", userId='" + userId + '\'' +
                 ", userSet=" + userSet +
-                ", campaignIdList=" + Arrays.toString(campaignIdList) +
+                ", campaignIdList=" + campaignIdList +
                 ", secondRules=" + secondRules +
-                ", insurePlaceCodeList=" + Arrays.toString(insurePlaceCodeList) +
+                ", insurePlaceCodeList=" + insurePlaceCodeList +
                 '}';
     }
 }
