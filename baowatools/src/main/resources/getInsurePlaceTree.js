@@ -17,7 +17,7 @@ function getInsurePlaceTree(){
                     elem: '#insureplace_tree'
                     ,data: data
                     ,showCheckbox: true  //是否显示复选框
-                    ,id: 'demoId1'
+                    ,id: 'insurePlace'
                     ,isJump: true //是否允许点击节点时弹出新窗口跳转
                     ,click: function(obj){
                         var data = obj.data;  //获取当前点击的节点数据
@@ -25,43 +25,45 @@ function getInsurePlaceTree(){
                     }
                 });
 
-                //监听提交
-                form.on('submit(form_commit)', function(data) {
-                    //获得选中的节点
+                // //监听提交
+                // form.on('submit(form_commit)', function(data) {
+                //     //获得选中的节点
+                //
+                //     var checkData = tree.getChecked('insurePlace');
+                //
+                //     var list = new Array();
+                //
+                //     list = getChecked_list(checkData);
+                //
+                //     console.log(checkData);
+                //
+                //     console.log(list);
+                //
+                // });
 
-                    var checkData = tree.getChecked('value');
 
-                    var list = new Array();
-
-                    list = getChecked_list(checkData);
-
-                    console.log(checkData);
-
-                    console.log(list);
-
-                });
-
-
-                // 获取选中节点的id
-                function getChecked_list(data) {
-                    var value = "";
-                    $.each(data, function (index, item) {
-                        if (value != "") {
-                            value = value + "," + item.value;
-                        }
-                        else {
-                            value = item.value;
-                        }
-                        var i = getChecked_list(item.children);
-                        if (i != "") {
-                            value = value + "," + i;
-                        }
-                    });
-                    return value;
-                }
+                // // 获取选中节点的id
+                // function getChecked_list(data) {
+                //     var value = "";
+                //     $.each(data, function (index, item) {
+                //         if (value != "") {
+                //             value = value + "," + item.value;
+                //         }
+                //         else {
+                //             value = item.value;
+                //         }
+                //         var i = getChecked_list(item.children);
+                //         if (i != "") {
+                //             value = value + "," + i;
+                //         }
+                //     });
+                //     return value;
+                // }
             }
         });
 
 
     });
 }
+
+

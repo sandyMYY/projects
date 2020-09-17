@@ -12,7 +12,7 @@
                 //console.log("data=" + data);
                 $.each(data, function(index, item){
                     //console.log("item" + index + "=" + item.label + item.value);
-                    $('#select_campaign').append(new Option(item.label));
+                    $('#select_campaign').append(new Option(item.label, item.value));
                 });
             }
             //重新渲染

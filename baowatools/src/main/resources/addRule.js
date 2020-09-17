@@ -7,17 +7,24 @@ function addRule(data) {
             element = layui.element,
             upload = layui.upload,
             flow = layui.flow;
-        var qyjlId = data.field.qyjlId;
-        var tdzId = data.field.tdzId;
-        var zxId = data.field.zxId;
+        var qyjlId = document.getElementById("qyjlId").value;
+        var tdzId = document.getElementById("tdzId").value;
+        var zxId = document.getElementById("zxId").value;
+
         var userId = {
             "qyjlId": qyjlId,
             "tdzId": tdzId,
             "zxId": zxId
         };
-        var campaignList = data.field.select_campaign;
-        var secondRules = data.field.select_nametype;
-        var insurePlaceCodeList = data.field.insureplace_tree;
+        console.log('userId='+ JSON.stringify(userId));
+        var campaignList = document.getElementsByName("select_campaign").value;
+        obj = $("#select_nametype option:selected");
+        console.log("select_nametype: " + obj.length);
+        var secondRules = [];
+        for (i=0;i<obj.length;i++)
+            secondRules[i] = obj[i].value;
+        var insurePlaceCodeList = document.getElementsByName("insureplace_tree");
+        console.log("secondRules" + secondRules);
 
         var dataContent = {
             "userId": userId,
@@ -25,6 +32,7 @@ function addRule(data) {
             "secondRules": secondRules,
             "insurePlaceCodeList": insurePlaceCodeList
         };
+        console.log('dataContent='+ JSON.stringify(dataContent));
         $.ajax({ //使用JQuery内置的Ajax方法
             type: "post", //post请求方式
             async: true,
